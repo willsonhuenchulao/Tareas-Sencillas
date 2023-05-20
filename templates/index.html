@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tareas Python</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilos.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+
+  <div class="flex justify-center items-center h-screen bg-gradient-to-br from-blue-500 to-blue-500  bg-cover bg-center"
+    style="background-image: url('https://images.unsplash.com/photo-1607499699372-7bb722dff7e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'); ">
+    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg p-8">
+      <h3 class="text-3xl font-extrabold sm:text-5xl text-white text-center">TAREAS SENCILLAS</h3>
+
+
+
+      <h5 class="text-lg text-white mb-6 text-center font-bold">Inicio de sesión</h5>
+
+
+
+      <form action="/login" method="post">
+        <label class="block text-white mb-2">Email</label>
+        <input type="email" class="w-full bg-transparent border-b-2 border-white text-white p-2 mb-5" name="email">
+
+        <label class="block text-white mb-2">Contraseña</label>
+        <input type="password" class="w-full bg-transparent border-b-2 border-white text-white p-2 mb-4"
+          name="password">
+
+        {% if message %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <strong>Error:</strong> {{ message }}
+        </div>
+        {% endif %}
+
+        <button type="submit"
+          class="bg-white bg-opacity-30 hover:bg-opacity-40 text-white font-bold py-2 px-4 rounded-full w-full">Acceder</button>
+      </form>
+    </div>
+  </div>
+
+
+   
+
+
+ 
+
+  
+  
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+</body>
+
+</html>

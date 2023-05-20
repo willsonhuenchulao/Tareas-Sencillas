@@ -1,0 +1,5 @@
+MYSQL_HOST = '127.0.0.1'
+MYSQL_USER = 'root'
+MYSQL_PASS = ''
+MYSQL_DB = 'gestion_de_tareas'
+HEX_SEC_KEY ='123456789'

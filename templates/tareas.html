@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tareas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="bg-amber-200 min-h-screen flex flex-col">
+
+  <nav class="bg-light">
+    <div class="container mx-auto flex items-center justify-between py-4 px-6">
+      <a class="text-2xl font-bold text-gray-900 sm:text-3xl" href="#">TAREAS SENCILLAS</a>
+      <span class="text-gray-700 font-extrabold">Bienvenido/a {{session['nombre']}} {{session['apellido']}} <a
+          href="{{url_for('logout')}}" class="mx-3">Salir</a></span>
+    </div>
+  </nav>
+
+  <div class="flex items-center justify-center shadow-md mt-10 mb-8 w-full ">
+    <div class="flex items-center bg-white shadow-lg rounded-lg p-6">
+      <!-- Contenido de la tarjeta -->
+      <div class="flex items-center px-5 ">
+        <label for="modal-tarea" class="flex items-center justify-center cursor-pointer rounded py-4 active:bg-slate-400 mx-auto">
+          <img src="{{url_for('static', filename='images/boton.png')}}" class="w-8" alt="">
+        </label>
+      </div>
+
+      <div class="flex items-center px-5">
+        <label for="modal-usuario" class="flex items-center justify-center cursor-pointer rounded py-4 active:bg-slate-400 mx-auto">
+          <img src="{{url_for('static', filename='images/usuario.png')}}" class="w-8" alt="">
+        </label>
+      </div>
+    </div>
+  </div>
+
+  
+  
+ 
+  
+
+
+  <!-- tareas -->
+  <div class="bg-white shadow-lg rounded-lg p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 shadow-md mt-6">
+    {% for task in task %}
+    <div class="flex items-center max-w-xs w-full p-6 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50">
+      <div class="card">
+        <div class="flex items-center text-xl font-semibold tracking-wide ">
+          {{task.title}}
+        </div>
+        <div class="flex items-center block text-xs font-medium tracking-widest uppercase dark:text-emerald-400">
+          {{task.description}}
+        </div>
+        <div class="flex items-center block text-xs font-medium tracking-widest uppercase dark:text-emerald-400">
+          {{task.date_task}}
+        </div>
+        <div>
+          <form action="/delete-task" method="POST">
+            <input type="hidden" value="{{task.id}}" name="id">
+            <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  
+  
+
+
+
+
+
+
+  <!-- Modal -->
+  <div class="relative">
+    <input type="checkbox" id="modal-tarea" class="peer fixed appearance-none opacity-0">
+
+    <label for="modal-tarea"
+      class="pointer-events-none invisible fixed inset-0 flex cursor-pointer items-center justify-center overflow-hidden overscroll-contain bg-slate-700/30 opacity-0 transition-all duration-200 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>0]:scale-100 max-w-3xl mx-auto">
+
+      <label
+        class="max-h-[calc(100vh - 5em)] h-fit max-w-lg scale-90 overflow-y-auto overscroll-contain rounded-md bg-white p-6 text-black shadow-2xl transition"
+        for="">
+        <h3 class="text-lg font-bold text-center">Nueva tarea</h3>
+
+
+        <div class="p-4">
+          <form action="/nueva-tarea" method="POST" class="max-w-md mx-auto">
+            <div class="mb-4">
+              <label for="title" class="text-lg font-bold">Titulo</label>
+              <input type="text" name="title" id="title"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+            </div>
+            <div class="mb-4">
+              <label for="description" class="text-lg font-bold">Description</label>
+              <textarea name="description" id="description" rows="5"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md resize-none focus:outline-none focus:border-blue-500"></textarea>
+            </div>
+            <div>
+              <button type="submit"
+                class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">guardar</button>
+            </div>
+          </form>
+        </div>
+      </label>
+
+    </label>
+  </div>
+
+  <div class="relative">
+    <input type="checkbox" id="modal-usuario" class="peer fixed appearance-none opacity-0">
+
+    <label for="modal-usuario"
+      class="pointer-events-none invisible fixed inset-0 flex cursor-pointer items-center justify-center overflow-hidden overscroll-contain bg-slate-700/30 opacity-0 transition-all duration-200 ease-in-out peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100 peer-checked:[&>*]:translate-y-0 peer-checked:[&>0]:scale-100 max-w-3xl mx-auto">
+      <div
+        class="max-h-[calc(100vh - 5em)] h-fit max-w-lg scale-90 overflow-y-auto overscroll-contain rounded-md bg-white p-6 text-black shadow-2xl transition">
+        <h3 class="text-lg font-bold mb-4 text-center">Nuevo Usuario</h3>
+
+        <form action="/nuevo-usuario" method="POST">
+          <div class="mb-4">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+
+          <div class="mb-4">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" name="apellidos" id="apellidos"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+
+          <div class="mb-4">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+
+          <div class="mb-4">
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" id="password"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+
+          <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">Guardar</button>
+        </form>
+      </div>
+    </label>
+  </div>
+
+  <footer aria-label="Site Footer" class="bg-gray-50 text-center">
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8 flex justify-center">
+      <div class="sm:flex sm:items-center sm:justify-between text-center">
+        <p class="mt-4 text-center text-sm text-gray-500 lg:mt-0 lg:text-right">
+          Copyright &copy; 2023. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+
+</body>
+
+</html>
