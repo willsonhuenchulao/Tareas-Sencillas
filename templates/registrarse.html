@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registrarse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilos.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    
+
+    <div class="flex justify-center items-center h-screen bg-gradient-to-br from-blue-500 to-blue-500  bg-cover bg-center"
+    style="background-image: url('https://images.unsplash.com/photo-1607499699372-7bb722dff7e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'); ">
+    
+    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg shadow-lg p-8">
+        <h5 class="text-lg text-white mb-6 text-center font-bold">Registarse</h5>
+
+        <form action="/registrarse" method="POST">
+            <labe class="block text-white mb-2" for="nombre">Nombre:</label>
+            <input class="w-full bg-transparent border-b-2 border-white text-white p-2 mb-4" type="text" id="nombre" name="nombre" required>
+    
+            <label class="block text-white mb-2" for="apellido">Apellido:</label>
+            <input class="w-full bg-transparent border-b-2 border-white text-white p-2 mb-4" type="text" id="apellido" name="apellido" required>
+    
+            <label class="block text-white mb-2" for="email">Correo Electrónico:</label>
+            <input class="w-full bg-transparent border-b-2 border-white text-white p-2 mb-4" type="email" id="email" name="email" required>
+    
+            <label class="block text-white mb-2" for="password">Contraseña:</label>
+            <input class="w-full bg-transparent border-b-2 border-white text-white p-2 mb-4" type="password" id="password" name="password" required>
+    
+            <button  class="bg-white bg-opacity-30 hover:bg-opacity-40 text-white font-bold py-2 px-4 rounded-full w-full" type="submit">Registrarse</button>
+        </form>
+    </div>
+
+</div>
+
+   
+
+    
+</body>
+</html>

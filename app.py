@@ -36,6 +36,37 @@ def login():
         return redirect(url_for('tareas'))
     else:
         return render_template('index.html', message="Usuario o contraseña incorrectos")
+    
+@app.route('/registrarse', methods=['POST', 'GET'])
+def registrarse():
+    if request.method == 'POST':
+        name = request.form['nombre']
+        surnames = request.form['apellido']
+        email = request.form['email']
+        password = request.form['password']
+
+        if name and surnames and email and password:
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT * FROM user WHERE email = %s", [email])
+            existing_user = cur.fetchone()
+
+            if existing_user is None:
+                sql = "INSERT INTO user (nombre, apellido, email, password) VALUES (%s, %s, %s, %s)"
+                data = (name, surnames, email, password)
+                cur.execute(sql, data)
+                mysql.connection.commit()
+
+                session['email'] = email
+                session['nombre'] = name
+                session['apellido'] = surnames
+
+                return redirect(url_for('tareas'))
+            else:
+                return render_template('registrarse.html', message="El correo electrónico ya está registrado")
+        else:
+            return render_template('registrarse.html', message="Debe completar todos los campos")
+    else:
+        return render_template('registrarse.html')
 
 @app.route('/tareas', methods=['GET'])
 def tareas():
